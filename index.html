@@ -2,51 +2,19 @@
 <html lang="pt-BR" ng-app="listaTelefonica">
 	<head>
 		<meta charset="UTF-8">
+		
 		<title>Lista Telefônica</title>
+		
 		<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/app.css">
+		
 		<script type="text/javascript" src="lib/angular/angular.min.js"></script>
 		<script type="text/javascript" src="lib/angular/angular-locale_pt-br.js"></script>
 		<script type="text/javascript" src="lib/jquery/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			angular.module("listaTelefonica", []);
-			angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope, $filter){
-				$scope.app = "Lista Telefônica";
-				$scope.contatos = [
-					{nome: "Pedro", telefone: "999998888", data: new Date(), operadora: {nome: "OI", codigo: 14, categoria: "Celular", cor: 'yellow', preco: 2}},
-					{nome: "Ana", telefone: "999998877", data: new Date(), operadora: {nome: "TIM", codigo: 41, categoria: "Celular", cor: 'blue', preco: 3}},
-					{nome: "Maria", telefone: "999998866", data: new Date(), operadora: {nome: "VIVO", codigo: 15, categoria: "Celular", cor: 'purple', preco: 1}}
-				];
-				$scope.operadoras = [
-					{nome: "OI", codigo: 14, categoria: "Celular", cor: 'yellow', preco: 2},
-					{nome: "VIVO", codigo: 15, categoria: "Celular", cor: 'purple', preco: 1},
-					{nome: "TIM", codigo: 41, categoria: "Celular", cor: 'blue', preco: 3},
-					{nome: "GVT", codigo: 25, categoria: "Fixo", cor: 'orange', preco: 1},
-					{nome: "Embratel", codigo: 21, categoria: "Fixo", cor: 'cyan', preco: 2}
-				];
-				$scope.adicionarContato = function(contato){
-					contato.data = new Date();
-					contato.nome = $filter("uppercase")(contato.nome);
-					$scope.contatos.push(angular.copy(contato));
-					delete $scope.contato;
-					$scope.contatoForm.$setPristine();
-				};
-				$scope.apagarContatos = function(contatos){
-					$scope.contatos = contatos.filter(function(contato){
-						if (!contato.selecionado) return contato;
-					});
-				};
-				$scope.temContatoSelecionado = function(contatos){
-					return contatos.some(function(contato){
-						return contato.selecionado;
-					});
-				};
-				$scope.ordenarPor = function(campo){
-					$scope.criterioDeOrdenacao = campo;
-					$scope.direcaoDaOrdenacao = !$scope.direcaoDaOrdenacao;
-				};
-			});
-		</script>
+		
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/controllers/listaTelefonicaCtrl.js"></script>
 	</head>
 	<body ng-controller="listaTelefonicaCtrl">
 		<div class="container">
@@ -107,7 +75,7 @@
 						<br>
 						<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="contatoForm.$invalid">Adicionar contato</button>
 						<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-if="temContatoSelecionado(contatos)">Apagar contatos</button><br>
-						<div ng-include="'footer.html'"></div>
+						<div ng-include="'views/footer.html'"></div>
 					</div>
 				</div>
 			</div>
