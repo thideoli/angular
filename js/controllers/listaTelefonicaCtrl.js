@@ -1,10 +1,9 @@
 angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope, $filter, config, contatosAPI, operadorasAPI, serialGenerator){
-	console.log(serialGenerator.generate());
 	var carregarContatos = function(){
 		contatosAPI.getContatos().then(
 			function(response){
-				if(response.data)
-					$scope.contatos = response.data;
+                if(response.data)
+                    $scope.contatos = response.data;
 			}, 
 			function(response){
 				alert('Erro: ' + response.status);
